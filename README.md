@@ -3,7 +3,7 @@
 ## Language
 Object-C
 
-## Supported Type
+## Supported Selected Type
 - Date
 - Time (Hour - Minute)
 - Date & Time
