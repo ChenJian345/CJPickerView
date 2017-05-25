@@ -27,6 +27,8 @@ typedef enum : NSUInteger {
     ViewController *controller = [[ViewController alloc] init];
     self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
+    
+    return YES;
 }
 
 
