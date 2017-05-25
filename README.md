@@ -1,7 +1,9 @@
 # CJPickerView
-
 ## Language
 Object-C
+
+## Platform
+- iOS
 
 ## Supported Selected Type
 - Date
