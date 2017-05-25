@@ -19,15 +19,50 @@ typedef enum : NSUInteger {
     CJPICKERVIEW_STYPE_COLUMN_TWO,
 } CJPICKERVIEW_STYPE;
 
+@protocol CJPickerViewDelegate <NSObject>
+
+- (void)onDateTimeSelected:(NSDate *)selectedDate;
+
+- (void)onResultSelected:(NSString *)selectedResultString;
+
+@end
+
 @interface CJPickerView : UIView
 
 @property (nonatomic, strong) UIView *barContentView;
 @property (nonatomic, strong) UIButton *btnCancel;
 @property (nonatomic, strong) UIButton *btnConfirm;
 
-@property (nonatomic, strong) UIPickerView *pickerView;
-@property (nonatomic, strong) UIDatePicker *datePickerView;
+@property (nonatomic, weak) id<CJPickerViewDelegate> delegate;
 
-- (instancetype)initWithType:(CJPICKERVIEW_STYPE)style;
+/**
+ Only for select date or time
+ 
+ @param style CJPICKERVIEW_STYPE
+ @return CJPickerView instance
+ */
+- (instancetype)initWithDateType:(CJPICKERVIEW_STYPE)style;
+
+/**
+ Init picker view for select one or multi columns requirements.
+
+ @param style CJPICKERVIEW_STYPE
+ @param arrC1Titles First column string titles
+ @param arrC2Titles Second column string titles
+ @return CJPickerView instance
+ */
+- (instancetype)initWithColumnType:(CJPICKERVIEW_STYPE)style
+                       firstColumn:(NSArray *)arrC1Titles
+                      SecondColumn:(NSArray *)arrC2Titles;
+
+/**
+ Set date picker view min and max available date
+ 
+ @param minDate Minimum Date
+ @param maxDate Maximux Date
+ */
+- (void)setMinDate:(NSDate *)minDate maxDate:(NSDate *)maxDate;
+
+- (void)setDefaultSelectedRowIndex:(NSInteger)index forColumn:(NSInteger)columnIndex;
 
 @end

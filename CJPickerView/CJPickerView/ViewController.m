@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "CJPickerView.h"
 
-@interface ViewController ()
+@interface ViewController () <CJPickerViewDelegate>
 
 @end
 
@@ -29,7 +29,6 @@
     [self.view addSubview:btnPickData];
     
     [btnPickData addTarget:self action:@selector(showDatePickerView) forControlEvents:UIControlEventTouchUpInside];
-
 }
 
 
@@ -40,7 +39,23 @@
 
 #pragma mark - Event Handler
 - (void)showDatePickerView {
-    CJPickerView *pickerView = [[CJPickerView alloc] initWithType:CJPICKERVIEW_STYPE_DATE_AND_TIME];
+    NSArray *arr1 = @[@"SpeedX-28323", @"SpeedX-12345", @"Strava", @"App"];
+    NSArray *arr2 = @[@"野兽骑行", @"Apple", @"NTC", @"NRC"];
+//    CJPickerView *pickerView = [[CJPickerView alloc] initWithColumnType:CJPICKERVIEW_STYPE_COLUMN_ONE firstColumn:arr1 SecondColumn:nil];
+
+    CJPickerView *pickerView = [[CJPickerView alloc] initWithDateType:CJPICKERVIEW_STYPE_DATE_AND_TIME];
+    pickerView.delegate = self;
+    [pickerView setDefaultSelectedRowIndex:1 forColumn:0];
+//    [pickerView setDefaultSelectedRowIndex:2 forComponentIndex:1];
+}
+
+#pragma mark - CJPickerViewDelegate
+- (void)onDateTimeSelected:(NSDate *)selectedDate {
+    NSLog(@"Selected Date ： %@", selectedDate);
+}
+
+- (void)onResultSelected:(NSString *)selectedResultString {
+    NSLog(@"Selected Result ： %@", selectedResultString);
 }
 
 @end
